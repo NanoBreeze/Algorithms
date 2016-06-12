@@ -95,7 +95,7 @@ Node* findMax(Node* root)
 	
 	if (root->right)
 	{
-		findMax(root->right);
+		return findMax(root->right);
 	}
 	else
 	{
@@ -108,7 +108,7 @@ Node* findMin(Node* root)
 	
 	if (root->left)
 	{
-		findMax(root->left);
+		return findMin(root->left);
 	}
 	else
 	{
@@ -159,7 +159,6 @@ Node* deleteNode(Node* root, int data)
 			//if no children, simply delete this node
 			if ((root->left == nullptr) && (root->right == nullptr))
 			{
-                cout << "No children" << endl;
                 delete(root);
 				return nullptr;
 			}
@@ -167,7 +166,6 @@ Node* deleteNode(Node* root, int data)
 			//if one child only, that child shall replace this current node
 			if ((root->left == nullptr && root->right != nullptr) || (root->left != nullptr && root->left == nullptr))
 			{
-                cout << "One child\n" << endl;
 				Node* child = (root->left == nullptr) ? root->right : root->left;
                 delete(root);
 				return child;
@@ -176,7 +174,6 @@ Node* deleteNode(Node* root, int data)
 			//if two children ...replace this node with a predecessor or sucessor and delete that 
             if ((root->left != nullptr && root->right != nullptr))
             {
-                cout << "Two children" << endl;
                 Node* predecessor = findMax(root->left);
                 int temp = root->data;
                 root->data = predecessor->data;
